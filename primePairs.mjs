@@ -23,7 +23,7 @@ function sive(limit) {
   
 
   for (var i = 0; i < nums.length; i++) {
-    var p = nums[i];
+    var p = nums[i]
     if (p) {
       primes.push(p);
     }
@@ -36,15 +36,16 @@ export const handler = async (event) => {
 
   let primes = sive(n);
 
-  let factors = [];
+  let pairs = [];
 
-  for (const prime of primes) {
-    while (n % prime === 0) {
-      factors.push(prime);
-      n = n/prime;
-    }
+  for (const p1 of primes) {
+    for (const p2 of primes) {
+      if (p1 >= p2 && p1 * p2 === n) {
+        pairs.push(p1);
+        pairs.push(p2);
+      }
+    }  
   }
 
-  return factors;
+  return pairs;
 };
-
